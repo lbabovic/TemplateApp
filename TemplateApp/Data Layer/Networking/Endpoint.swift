@@ -10,7 +10,7 @@ import Foundation
 
 enum Endpoint {
     case sampleEndpoint(sample: String)
-    case sampleImageUpload(parameter1: String, parameter2: String, imageParameter: String, imageData: Data)
+    case sampleImageUpload(boundaryString: String = UUID().uuidString, parameter1: String, parameter2: String, imageParameter: String, imageData: Data)
     
     var path: String {
         switch self {
@@ -32,9 +32,9 @@ enum Endpoint {
             return [
                 "sample": sample
             ].percentEscaped().data(using: .utf8)
-        case .sampleImageUpload(let parameter1, let parameter2, let imageParameter, let imageData):
+        case .sampleImageUpload(let parameters):
             //needs work
-            return Data.formImageRequestData(with: ["paramter" : parameter1, "parameter2": parameter2], for: imageParameter, boundary: UUID().uuidString, imageData: imageData)
+            return Data.formImageRequestData(with: ["paramter" : parameters.parameter1, "parameter2": parameters.parameter2], for: parameters.imageParameter, boundary: parameters.boundaryString, imageData: parameters.imageData)
         default:
             return nil
         }
@@ -50,10 +50,11 @@ enum Endpoint {
     }
     
     func addHeaders(_ request: URLRequest) -> URLRequest{
+        var returningRequest = request
+        returningRequest.addValue("ApiKey apiKeyHere", forHTTPHeaderField: "Authorization")
         switch self {
-        case .sampleImageUpload:
-            var returningRequest = request
-            returningRequest.setValue("multipart/form-data; boundary=\(UUID().uuidString)", forHTTPHeaderField: "Content-Type")
+        case .sampleImageUpload(let arguments):
+            returningRequest.setValue("multipart/form-data; boundary=\(arguments.boundaryString)", forHTTPHeaderField: "Content-Type")
         default:
             return request
         }
