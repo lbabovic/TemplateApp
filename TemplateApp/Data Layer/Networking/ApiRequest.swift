@@ -22,7 +22,6 @@ struct ApiRequest {
         var request = URLRequest(url: url)
         request.setRequestType(endpoint.requestType)
         request.httpBody = endpoint.body
-        //            request.addValue(KeychainProvider.loadKey(), forHTTPHeaderField: "Authorization")
         return request
     }
 }

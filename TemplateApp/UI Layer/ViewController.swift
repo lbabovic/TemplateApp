@@ -12,7 +12,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        guard let request = ApiRequest(endpoint: .sampleImageUpload(parameter1: "ttt", parameter2: "tt", imageParameter: "tt", imageData: Data())).urlRequest else {return}
         // Do any additional setup after loading the view.
     }
 
