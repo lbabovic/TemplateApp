@@ -15,7 +15,7 @@ extension Data {
             let result = try JSONDecoder().decode(T.self, from: self)
             callback(.success(result))
         }catch {
-            if T.self == SampleCustomServerError.self {callback(.error(WebServiceError.decodingError))}
+            if T.self == SampleCustomServerError.self {callback(.error(WebServiceError.decodingError));return}
             decodeJSONFrom { (response: Response<SampleCustomServerError>) in
                 switch response {
                 case .success(let errorResponse):

@@ -33,7 +33,6 @@ enum Endpoint {
                 "sample": sample
             ].percentEscaped().data(using: .utf8)
         case .sampleImageUpload(let parameters):
-            //needs work
             return Data.formImageRequestData(with: ["paramter" : parameters.parameter1, "parameter2": parameters.parameter2], for: parameters.imageParameter, boundary: parameters.boundaryString, imageData: parameters.imageData)
         default:
             return nil
