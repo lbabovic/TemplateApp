@@ -15,6 +15,7 @@ protocol WebService: class{
 
 class WebServiceProvider: WebService{
     private let session: NetworkSession
+    var JSONResponseLoggingIsOn = true
     
     init(session: NetworkSession) {
         self.session = session
@@ -33,6 +34,11 @@ class WebServiceProvider: WebService{
     }
     
     private func handleResponse<T: Decodable>(_ data: Data?, httpResponse: HTTPURLResponse?, error: Error?, callback: (Response<T>) -> Void){
+        if JSONResponseLoggingIsOn, let data = data {
+            print("JSON RESPONSE: \n")
+            print(String(data: data, encoding: .utf8) ?? "EMPTY")
+            print("\n\n")
+        }
         switch httpResponse?.statusCode {
         case 201:
             callback(.error(WebServiceError.statusCodeOK))
