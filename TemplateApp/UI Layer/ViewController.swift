@@ -8,22 +8,45 @@
 
 import UIKit
 
+protocol ViewControllerDependencies {
+    var exampleUseCase: ExampleUseCase {get}
+}
+
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        guard let request = ApiRequest(endpoint: .sampleImageUpload(parameter1: "ttt", parameter2: "tt", imageParameter: "tt", imageData: Data())).urlRequest else {return}
-        // Do any additional setup after loading the view.
+    let dependencies: ViewControllerDependencies
+    
+    init(dependencies: ViewControllerDependencies) {
+        self.dependencies = dependencies
+        super.init(nibName: nil, bundle: nil)
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    required init?(coder: NSCoder) { return nil }
+    
+    func exampleFetchData() {
+        dependencies.exampleUseCase.exampleFetchData { [unowned self] response in
+            switch response {
+            case .success(let result):
+                print(result)
+            case .error(let error):
+                switch error {
+                default:
+                    print(error)
+                }
+            }
+        }
     }
-    */
+    
+    func examplePostData() {
+        dependencies.exampleUseCase.examplePostData { [unowned self] response in
+            switch response {
+            case .success:
+                print("success!")
+            case .error(let error):
+                switch error {
+                default:
+                    print(error)
+                }
+            }
+        }
+    }
 }

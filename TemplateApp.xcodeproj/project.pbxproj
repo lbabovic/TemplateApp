@@ -24,6 +24,11 @@
 		9D4F4127240954970040A74F /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4F4126240954970040A74F /* Data.swift */; };
 		9D4F4129240967C30040A74F /* URLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4F4128240967C30040A74F /* URLRequest.swift */; };
 		9D4F412B24096B300040A74F /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4F412A24096B300040A74F /* Dictionary.swift */; };
+		9DA9F4C82491128800B2B6B0 /* ExampleUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9F4C72491128800B2B6B0 /* ExampleUseCase.swift */; };
+		9DA9F4CA2491132600B2B6B0 /* ExampleInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9F4C92491132600B2B6B0 /* ExampleInteractor.swift */; };
+		9DA9F4CC2491133400B2B6B0 /* ExampleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9F4CB2491133400B2B6B0 /* ExampleProvider.swift */; };
+		9DA9F4D02491135E00B2B6B0 /* ExampleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9F4CF2491135E00B2B6B0 /* ExampleEntity.swift */; };
+		9DA9F4D22491138B00B2B6B0 /* TemplateExampleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DA9F4D12491138B00B2B6B0 /* TemplateExampleProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +51,11 @@
 		9D4F4126240954970040A74F /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		9D4F4128240967C30040A74F /* URLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequest.swift; sourceTree = "<group>"; };
 		9D4F412A24096B300040A74F /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		9DA9F4C72491128800B2B6B0 /* ExampleUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleUseCase.swift; sourceTree = "<group>"; };
+		9DA9F4C92491132600B2B6B0 /* ExampleInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleInteractor.swift; sourceTree = "<group>"; };
+		9DA9F4CB2491133400B2B6B0 /* ExampleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleProvider.swift; sourceTree = "<group>"; };
+		9DA9F4CF2491135E00B2B6B0 /* ExampleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleEntity.swift; sourceTree = "<group>"; };
+		9DA9F4D12491138B00B2B6B0 /* TemplateExampleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateExampleProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +151,7 @@
 		9D4F4110240922FE0040A74F /* Use Cases */ = {
 			isa = PBXGroup;
 			children = (
+				9DA9F4C72491128800B2B6B0 /* ExampleUseCase.swift */,
 			);
 			path = "Use Cases";
 			sourceTree = "<group>";
@@ -148,6 +159,7 @@
 		9D4F4111240923070040A74F /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
+				9DA9F4C92491132600B2B6B0 /* ExampleInteractor.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -155,6 +167,7 @@
 		9D4F4112240923120040A74F /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				9DA9F4CF2491135E00B2B6B0 /* ExampleEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -171,6 +184,7 @@
 		9D4F41142409233E0040A74F /* Provider protocols */ = {
 			isa = PBXGroup;
 			children = (
+				9DA9F4CB2491133400B2B6B0 /* ExampleProvider.swift */,
 			);
 			path = "Provider protocols";
 			sourceTree = "<group>";
@@ -190,6 +204,7 @@
 		9D4F411A240942590040A74F /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				9DA9F4D12491138B00B2B6B0 /* TemplateExampleProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -278,12 +293,17 @@
 				9D4F4124240945550040A74F /* NetworkMonitor.swift in Sources */,
 				9D4F411C2409427A0040A74F /* NetworkSession.swift in Sources */,
 				9D4F41182409236E0040A74F /* RequestResponse.swift in Sources */,
+				9DA9F4D02491135E00B2B6B0 /* ExampleEntity.swift in Sources */,
 				9D4F411E240942A50040A74F /* Endpoint.swift in Sources */,
+				9DA9F4D22491138B00B2B6B0 /* TemplateExampleProvider.swift in Sources */,
+				9DA9F4CC2491133400B2B6B0 /* ExampleProvider.swift in Sources */,
 				9D4F410F240922D30040A74F /* AppDependenciesContainer.swift in Sources */,
 				9D4F410C24091EBD0040A74F /* ViewController.swift in Sources */,
 				9D4F4120240942BC0040A74F /* ApiRequest.swift in Sources */,
 				9D4F4127240954970040A74F /* Data.swift in Sources */,
 				9D4F4129240967C30040A74F /* URLRequest.swift in Sources */,
+				9DA9F4CA2491132600B2B6B0 /* ExampleInteractor.swift in Sources */,
+				9DA9F4C82491128800B2B6B0 /* ExampleUseCase.swift in Sources */,
 				9D4F4105240917E50040A74F /* AppCoordinator.swift in Sources */,
 				9D4F40EF240917880040A74F /* AppDelegate.swift in Sources */,
 				9D4F412B24096B300040A74F /* Dictionary.swift in Sources */,

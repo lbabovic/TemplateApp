@@ -70,6 +70,7 @@ enum WebServiceError: Error, Equatable {
     case noInternetConnection
     case serverError
     case wrongCredentials
+    case URLRequestFormingError
     case tokenExpired
     case decodingError
     //HAVE TO REWRITE WEBSERVICE FOR STATUSCODE

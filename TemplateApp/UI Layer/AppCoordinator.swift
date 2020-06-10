@@ -17,7 +17,7 @@ class AppCoordinator {
     }
     
     func start() {
-        let viewController = ViewController()
+        let viewController = ViewController(dependencies: dependencies)
         window.rootViewController = viewController
         window.makeKeyAndVisible()
     }

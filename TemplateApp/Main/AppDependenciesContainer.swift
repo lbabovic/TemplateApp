@@ -8,6 +8,8 @@
 
 import Foundation
 
-class AppDependenciesContainer {
-    
+class AppDependenciesContainer: ViewControllerDependencies {
+    lazy var exampleProvider: ExampleProvider = TemplateExampleProvider()
+        
+    lazy var exampleUseCase: ExampleUseCase = ExampleInteractor(provider: exampleProvider)
 }
