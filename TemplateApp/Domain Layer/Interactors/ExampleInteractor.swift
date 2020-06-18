@@ -16,7 +16,6 @@ class ExampleInteractor: ExampleUseCase {
     }
     
     func exampleFetchData(completion: @escaping (Response<ExampleEntity>) -> Void) {
-        provider.exampleFetchData(completion: completion)
         provider.exampleFetchData { [weak self] response in
             switch response {
             case .success(let result):
