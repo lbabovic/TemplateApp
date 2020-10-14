@@ -6,7 +6,7 @@
 //  Copyright © 2020 lbabovic. All rights reserved.
 //
 
-import Foundation
+import Alamofire
 
 struct ApiRequest {
     static let baseUrlString: String = "https://www.someurl.com/"
@@ -16,13 +16,10 @@ struct ApiRequest {
         self.endpoint = endpoint
     }
     
-    var urlRequest: URLRequest? {
+    var dataRequest: DataRequest? {
         let urlString = ApiRequest.baseUrlString + endpoint.path + endpoint.parameters
-        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: encodedString) else { return nil }
-        var request = URLRequest(url: url)
-        request.setRequestType(endpoint.requestType)
-        request.httpBody = endpoint.body
-        return request
+        guard let encodedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return nil }
+        return AF.request(encodedString, method: endpoint.httpMethod, parameters:endpoint.bodyParameters, encoding: JSONEncoding.default,interceptor: endpoint.interceptor)
     }
 }
 

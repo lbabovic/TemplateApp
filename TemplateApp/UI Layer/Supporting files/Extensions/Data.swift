@@ -50,6 +50,8 @@ extension Data {
         data.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
         data.append(imageData)
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        
         return data
     }
 }

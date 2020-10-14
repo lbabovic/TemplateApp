@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 enum Endpoint {
     case sampleEndpoint(sample: String)
@@ -26,20 +27,22 @@ enum Endpoint {
         }
     }
     
-    var body: Data? {
+    var bodyParameters: [String: Any]? {
         switch self {
         case .sampleEndpoint(let sample):
             return [
                 "sample": sample
-            ].percentEscaped().data(using: .utf8)
+            ]
         case .sampleImageUpload(let parameters):
-            return Data.formImageRequestData(with: ["paramter" : parameters.parameter1, "parameter2": parameters.parameter2], for: parameters.imageParameter, boundary: parameters.boundaryString, imageData: parameters.imageData)
+            //not yet implemented
+            return nil
+//            return Data.formImageRequestData(with: ["paramter" : parameters.parameter1, "parameter2": parameters.parameter2], for: parameters.imageParameter, boundary: parameters.boundaryString, imageData: parameters.imageData)
         default:
             return nil
         }
     }
     
-    var requestType: RequestType {
+    var httpMethod: HTTPMethod {
         switch self {
         case .sampleEndpoint:
             return .post
@@ -48,15 +51,7 @@ enum Endpoint {
         }
     }
     
-    func addHeaders(_ request: URLRequest) -> URLRequest{
-        var returningRequest = request
-        returningRequest.addValue("ApiKey apiKeyHere", forHTTPHeaderField: "Authorization")
-        switch self {
-        case .sampleImageUpload(let arguments):
-            returningRequest.setValue("multipart/form-data; boundary=\(arguments.boundaryString)", forHTTPHeaderField: "Content-Type")
-        default:
-            return request
-        }
-        return request
+    var interceptor: RequestInterceptor {
+        return APIInterceptor(endpoint: self)
     }
 }

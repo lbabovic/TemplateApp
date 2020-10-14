@@ -44,7 +44,7 @@ class ViewController: UIViewController {
             case .error(let error):
                 switch error {
                 default:
-                    print(error)
+                    self.presentNativePopUp(title: "Greška!", text: (error as? WebServiceError)?.rawValue ?? error.localizedDescription)
                 }
             }
         }

@@ -11,12 +11,12 @@ import Foundation
 class TemplateExampleProvider: ExampleProvider {
     let webService: WebService
     
-    init(webService: WebService = WebServiceProvider(session: DataNetworksession())){
+    init(webService: WebService) {
         self.webService = webService
     }
 
     func exampleFetchData(completion: @escaping (Response<ExampleEntity>) -> Void) {
-        guard let request = ApiRequest(endpoint: .sampleEndpoint(sample: "samplePostParameter")).urlRequest else {completion(.error(WebServiceError.URLRequestFormingError));return}
+        guard let request = ApiRequest(endpoint: .sampleEndpoint(sample: "samplePostParameter")).dataRequest else {completion(.error(WebServiceError.URLRequestFormingError));return}
         webService.execute(request) { (response: Response<ExampleDataResponse>) in
             switch response {
             case .success(let result):
@@ -28,7 +28,7 @@ class TemplateExampleProvider: ExampleProvider {
     }
     
     func examplePostData(completion: @escaping (RequestResponse) -> Void) {
-        guard let request = ApiRequest(endpoint: .sampleEndpoint(sample: "samplePostParameter")).urlRequest else {completion(.error(WebServiceError.URLRequestFormingError));return}
+        guard let request = ApiRequest(endpoint: .sampleEndpoint(sample: "samplePostParameter")).dataRequest else {completion(.error(WebServiceError.URLRequestFormingError));return}
         webService.execute(request) { (response: Response<ExamplePostRequestResponse>) in
             switch response {
             case .success(let result):

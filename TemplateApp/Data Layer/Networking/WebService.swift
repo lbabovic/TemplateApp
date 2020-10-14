@@ -7,30 +7,27 @@
 //
 
 import Foundation
+import Alamofire
 
 protocol WebService: class{
-    func execute<T: Decodable>(_ request: URLRequest, callback: @escaping(Response<T>) -> Void)
-    func cancelCurrentTask()
+    func execute<T: Decodable>(_ request: DataRequest, callback: @escaping(Response<T>) -> Void)
 }
 
 class WebServiceProvider: WebService{
-    private let session: NetworkSession
     var JSONResponseLoggingIsOn = true
+    let networkReachabilityManager: NetworkReachabilityManager?
     
-    init(session: NetworkSession) {
-        self.session = session
+    init(networkReachabilityManager: NetworkReachabilityManager?) {
+        self.networkReachabilityManager = networkReachabilityManager
     }
     
-    func execute<T>(_ request: URLRequest, callback: @escaping (Response<T>) -> Void) where T : Decodable {
-        //requires nointernet handling
-//        if Reachability()?.connection == Reachability.Connection.none{ callback(.error(WebServiceError.noInternetConnection));return}
-        session.perform(with: request) { [weak self] (data, response, error) in
-            self?.handleResponse(data, httpResponse: response as? HTTPURLResponse, error: error, callback: callback)
+    func execute<T>(_ request: DataRequest, callback: @escaping (Response<T>) -> Void) where T : Decodable {
+        if !(networkReachabilityManager?.isReachable ?? false) {
+            callback(.error(WebServiceError.noInternetConnection));return
         }
-    }
-    
-    func cancelCurrentTask() {
-        session.cancelTask()
+        request.responseJSON{ [weak self] AFResponse in
+            self?.handleResponse(AFResponse.data, httpResponse: AFResponse.response, error: AFResponse.error, callback: callback)
+        }
     }
     
     private func handleResponse<T: Decodable>(_ data: Data?, httpResponse: HTTPURLResponse?, error: Error?, callback: (Response<T>) -> Void){
@@ -65,22 +62,19 @@ struct SampleCustomServerError: Codable {
     let error: String
 }
 
-enum WebServiceError: Error, Equatable {
-    case ambigousResponse
-    case noInternetConnection
-    case serverError
-    case wrongCredentials
+enum WebServiceError: String, Error, Equatable {
+    case ambigousResponse = "Greška u komunikaciji sa serverom!"
+    case noInternetConnection = "Neuspješna"
+    case serverError = "Greška sa serverom!"
+    case wrongCredentials = "Pogrešno korisničko ime ili lozinka!"
     case URLRequestFormingError
-    case tokenExpired
     case decodingError
-    //HAVE TO REWRITE WEBSERVICE FOR STATUSCODE
     case statusCodeOK
     case accountDoesNotExist
     case sessionExpired
     case accountNotAuthorized
     case requestBodyError
-    case emailAlreadyExists
-    case emptyArray
+    case emailAlreadyExists = "Korisnik sa datom e-adresom već postoji!"
     case timeoutError
-    case methodNotAllowed
+    case methodNotAllowed    
 }

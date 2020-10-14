@@ -6,10 +6,15 @@
 //  Copyright © 2020 lbabovic. All rights reserved.
 //
 
-import Foundation
+import Alamofire
 
 class AppDependenciesContainer: ViewControllerDependencies {
-    lazy var exampleProvider: ExampleProvider = TemplateExampleProvider()
+    
+    let networkReachabilityManager = NetworkReachabilityManager()
+    
+    lazy var webService = WebServiceProvider(networkReachabilityManager: networkReachabilityManager)
+    
+    lazy var exampleProvider: ExampleProvider = TemplateExampleProvider(webService: webService)
         
     lazy var exampleUseCase: ExampleUseCase = ExampleInteractor(provider: exampleProvider)
 }
